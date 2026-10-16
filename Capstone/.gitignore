@@ -1,0 +1,5 @@
+bench
+*.data
+perf.data*
+*.o
+NOTES.md
