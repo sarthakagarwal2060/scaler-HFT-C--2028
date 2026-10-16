@@ -14,8 +14,19 @@ and benchmarked + profiled with `perf`.
 
 ## Build
 
+One g++ command:
+
 ```bash
-g++ -O2 -std=c++17 bench.cpp -o bench
+g++ -O2 -std=c++17 bench.cpp impl_a_map.cpp impl_b_pqueue.cpp impl_c_array.cpp -o bench
+```
+
+Or with CMake:
+
+```bash
+mkdir build && cd build
+cmake ..
+make
+# the bench binary is then in build/
 ```
 
 ## Run
@@ -29,12 +40,15 @@ g++ -O2 -std=c++17 bench.cpp -o bench
 
 | file | what it is |
 |------|-----------|
-| `orderbook.h`     | API structs (`Side`, `Level`, `BBO`) + shared `IOrderBook` interface |
-| `impl_a_map.h`    | Implementation A (`std::map`) |
-| `impl_b_pqueue.h` | Implementation B (`priority_queue` + lazy deletion) |
-| `impl_c_array.h`  | Implementation C (flat arrays, my design) |
-| `bench.cpp`       | the one benchmark + `--verify` |
-| `perf_results/`   | saved `perf stat` / `perf report` output |
+| `orderbook.h`                      | API structs (`Side`, `Level`, `BBO`) + shared `IOrderBook` interface |
+| `impl_a_map.h` / `.cpp`            | Implementation A (`std::map`) |
+| `impl_b_pqueue.h` / `.cpp`         | Implementation B (`priority_queue` + lazy deletion) |
+| `impl_c_array.h` / `.cpp`          | Implementation C (flat arrays, my design) |
+| `bench.cpp`                        | the one benchmark + `--verify` |
+| `perf_results/`                    | saved `perf stat` / `perf report` output |
+
+Each implementation is split into a header (class declaration) and a `.cpp` (method definitions);
+`bench.cpp` includes the three headers and all four `.cpp` files are compiled together.
 
 ## Interface changes
 
