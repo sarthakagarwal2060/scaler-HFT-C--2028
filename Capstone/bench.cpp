@@ -188,7 +188,7 @@ int run_verify() {
         }
     }
 
-    cout << "Implementation A: PASS  (reference)\n";
+    cout << "Implementation A: PASS\n";
     cout << "Implementation B: " << (okB ? "PASS" : "FAIL") << "\n";
     cout << "Implementation C: " << (okC ? "PASS" : "FAIL") << "\n\n";
 
